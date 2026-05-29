@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Designer Créatif</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --noir: #0e0e0e;
+    --blanc: #f5f2ec;
+    --accent: #c8a96e;
+    --gris: #6b6b6b;
+    --clair: #e8e3d9;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--blanc);
+    color: var(--noir);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 4rem;
+    background: var(--blanc);
+    border-bottom: 1px solid var(--clair);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--gris);
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--noir); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 4rem 4rem 4rem 4rem;
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title em { font-style: italic; color: var(--accent); }
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--gris);
+    line-height: 1.8;
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+  }
+  .btn {
+    display: inline-block;
+    padding: 0.9rem 2.5rem;
+    background: var(--noir);
+    color: var(--blanc);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn:hover { background: var(--accent); transform: translateY(-2px); }
+
+  .hero-right {
+    background: var(--clair);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .hero-img-placeholder {
+    width: 340px; height: 440px;
+    background: var(--noir);
+    position: relative;
+    display: flex; align-items: flex-end;
+    padding: 2rem;
+  }
+  .hero-img-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #2a2a2a 0%, #0e0e0e 100%);
+  }
+  .hero-img-caption {
+    position: relative;
+    color: var(--accent);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+  }
+  .floating-tag {
+    position: absolute;
+    top: 2.5rem; right: 2.5rem;
+    background: var(--accent);
+    color: var(--blanc);
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ── SECTION COMMUNE ── */
+  section { padding: 6rem 4rem; }
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    line-height: 1.2;
+    margin-bottom: 3rem;
+  }
+
+  /* ── SERVICES ── */
+  .services { background: var(--noir); color: var(--blanc); }
+  .services .section-title { color: var(--blanc); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #2a2a2a;
+    border: 1px solid #2a2a2a;
+    margin-top: 3rem;
+  }
+  .service-card {
+    background: var(--noir);
+    padding: 2.5rem 2rem;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .service-card:hover { background: #1a1a1a; }
+  .service-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--accent);
+    opacity: 0.4;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .service-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.02em;
+  }
+  .service-desc { font-size: 0.9rem; color: #888; line-height: 1.7; }
+
+  /* ── PROJETS ── */
+  .projets { background: var(--blanc); }
+  .projets-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  .projet-card {
+    position: relative; overflow: hidden; cursor: pointer;
+    aspect-ratio: 4/3;
+    background: var(--clair);
+  }
+  .projet-card:first-child { grid-column: span 2; aspect-ratio: 16/7; }
+  .projet-bg {
+    width: 100%; height: 100%;
+    transition: transform 0.6s ease;
+  }
+  .projet-card:hover .projet-bg { transform: scale(1.04); }
+  .projet-overlay {
+    position: absolute; inset: 0;
+    background: rgba(14,14,14,0); 
+    display: flex; flex-direction: column;
+    justify-content: flex-end; padding: 2rem;
+    transition: background 0.4s;
+  }
+  .projet-card:hover .projet-overlay { background: rgba(14,14,14,0.6); }
+  .projet-info { transform: translateY(10px); opacity: 0; transition: all 0.4s; }
+  .projet-card:hover .projet-info { transform: translateY(0); opacity: 1; }
+  .projet-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+  .projet-nom {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--blanc);
+  }
+
+  /* Background placeholders colorés pour les projets */
+  .bg-1 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+  .bg-2 { background: linear-gradient(135deg, #2d1b69 0%, #11998e 100%); }
+  .bg-3 { background: linear-gradient(135deg, #c8a96e 0%, #8b6914 100%); }
+  .bg-4 { background: linear-gradient(135deg, #1a1a1a 0%, #3d3d3d 100%); }
+
+  /* ── À PROPOS ── */
+  .apropos {
+    background: var(--clair);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .apropos-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--accent);
+  }
+  .stat-label { font-size: 0.85rem; color: var(--gris); margin-top: 0.3rem; }
+
+  .apropos-img {
+    background: var(--noir);
+    aspect-ratio: 3/4;
+    display: flex; align-items: flex-end; padding: 2rem;
+  }
+  .apropos-img-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 1.1rem;
+  }
+
+  /* ── CONTACT ── */
+  .contact { background: var(--noir); color: var(--blanc); text-align: center; }
+  .contact .section-title { color: var(--blanc); max-width: 600px; margin: 0 auto 1rem; }
+  .contact-sub { color: #888; font-size: 1rem; margin-bottom: 3rem; }
+  .contact-email {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: var(--accent);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 3rem;
+    transition: opacity 0.3s;
+  }
+  .contact-email:hover { opacity: 0.7; }
+  .socials { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
+  .social-link {
+    text-decoration: none;
+    color: #666;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .social-link:hover { color: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--noir);
+    border-top: 1px solid #2a2a2a;
+    padding: 1.5rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer p { font-size: 0.8rem; color: #444; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left > * {
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+  }
+  .hero-eyebrow { animation-delay: 0.1s; }
+  .hero-title { animation-delay: 0.25s; }
+  .hero-desc { animation-delay: 0.4s; }
+  .btn { animation-delay: 0.55s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 6rem 2rem 3rem; }
+    .hero-right { min-height: 320px; }
+    .hero-img-placeholder { width: 240px; height: 300px; }
+    section { padding: 4rem 2rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .projets-grid { grid-template-columns: 1fr; }
+    .projet-card:first-child { grid-column: span 1; aspect-ratio: 4/3; }
+    .apropos { grid-template-columns: 1fr; }
+    .apropos-img { min-height: 280px; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Camille Dupont</div>
+  <ul class="nav-links">
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#apropos">À propos</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="accueil">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Designer Créatif & Directeur Artistique</p>
+    <h1 class="hero-title">Créer, c'est<br>donner une <em>âme</em><br>aux idées.</h1>
+    <p class="hero-desc">Je transforme des concepts en expériences visuelles mémorables — identités de marque, typographie, design graphique et direction artistique.</p>
+    <a href="#projets" class="btn">Voir mes projets</a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-placeholder">
+      <span class="hero-img-caption">Votre photo ici</span>
+    </div>
+    <div class="floating-tag">Disponible</div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <p class="section-label">Ce que je fais</p>
+  <h2 class="section-title">Services</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-number">01</div>
+      <div class="service-name">Identité Visuelle</div>
+      <p class="service-desc">Création de logos, chartes graphiques et systèmes visuels cohérents pour des marques qui veulent se démarquer.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-number">02</div>
+      <div class="service-name">Direction Artistique</div>
+      <p class="service-desc">Conception et pilotage de la vision créative de vos projets, de la photo à la mise en page finale.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-number">03</div>
+      <div class="service-name">Design Print & Digital</div>
+      <p class="service-desc">Affiches, packaging, supports de communication, interfaces — chaque support traité avec soin.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section class="projets" id="projets">
+  <p class="section-label">Mon travail</p>
+  <h2 class="section-title">Projets récents</h2>
+  <div class="projets-grid">
+    <div class="projet-card">
+      <div class="projet-bg bg-1" style="height:100%"></div>
+      <div class="projet-overlay">
+        <div class="projet-info">
+          <p class="projet-tag">Identité de marque</p>
+          <p class="projet-nom">Studio Azur — Identité complète</p>
+        </div>
+      </div>
+    </div>
+    <div class="projet-card">
+      <div class="projet-bg bg-2" style="height:100%"></div>
+      <div class="projet-overlay">
+        <div class="projet-info">
+          <p class="projet-tag">Direction Artistique</p>
+          <p class="projet-nom">Campagne Printemps</p>
+        </div>
+      </div>
+    </div>
+    <div class="projet-card">
+      <div class="projet-bg bg-3" style="height:100%"></div>
+      <div class="projet-overlay">
+        <div class="projet-info">
+          <p class="projet-tag">Packaging</p>
+          <p class="projet-nom">Collection Dorée</p>
+        </div>
+      </div>
+    </div>
+    <div class="projet-card">
+      <div class="projet-bg bg-4" style="height:100%"></div>
+      <div class="projet-overlay">
+        <div class="projet-info">
+          <p class="projet-tag">Typographie</p>
+          <p class="projet-nom">Editorial — Magazine N°12</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<section class="apropos" id="apropos">
+  <div>
+    <p class="section-label">Qui suis-je</p>
+    <h2 class="section-title">Passionné(e) par le beau depuis toujours.</h2>
+    <p style="color: var(--gris); line-height: 1.8; font-size: 1rem;">Designer indépendant(e) basé(e) à Paris, je collabore avec des marques ambitieuses pour créer des identités visuelles fortes et durables. Mon approche mêle rigueur artistique et écoute attentive des besoins.</p>
+    <div class="apropos-stats">
+      <div>
+        <div class="stat-num">48+</div>
+        <div class="stat-label">Projets réalisés</div>
+      </div>
+      <div>
+        <div class="stat-num">6 ans</div>
+        <div class="stat-label">D'expérience</div>
+      </div>
+      <div>
+        <div class="stat-num">30+</div>
+        <div class="stat-label">Clients satisfaits</div>
+      </div>
+      <div>
+        <div class="stat-num">5★</div>
+        <div class="stat-label">Note moyenne</div>
+      </div>
+    </div>
+  </div>
+  <div class="apropos-img">
+    <span class="apropos-img-text">Votre portrait ici</span>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <p class="section-label">Me contacter</p>
+  <h2 class="section-title">Vous avez un projet en tête ?</h2>
+  <p class="contact-sub">Je suis disponible pour de nouvelles collaborations.</p>
+  <a href="mailto:votre@email.com" class="contact-email">votre@email.com</a>
+  <div class="socials">
+    <a href="#" class="social-link">Behance</a>
+    <a href="#" class="social-link">Instagram</a>
+    <a href="#" class="social-link">LinkedIn</a>
+    <a href="#" class="social-link">Dribbble</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Camille Dupont — Tous droits réservés</p>
+  <p>Design fait avec soin ✦</p>
+</footer>
+
+</body>
+</html>
